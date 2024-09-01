@@ -8,7 +8,7 @@ const ruta = require('./controlador/controlador');
 
 /*const url = 'http://localhost:3000';*/
 
-const url = 'https://banco-awwz.onrender.com/';
+const url = 'https://banco-awwz.onrender.com';
 
 
   app.use(cors({
