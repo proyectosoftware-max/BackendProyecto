@@ -23,7 +23,7 @@ const url = 'https://banco-awwz.onrender.com';
 
 
   app.get('/', (req, res) => {
-    res.send('Hola, mundo!');
+    res.send('El servidor ha iniciado con exito!');
   });
 
   app.use((req, res, next) => {
