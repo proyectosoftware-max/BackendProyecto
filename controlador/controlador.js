@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Usuario = require('../modelo/esquema');
-const Comentario = require('../modelo/esquemaComentario')
+
 
 router.post('/agregar', async (req, res) => {
 
@@ -32,7 +32,7 @@ router.get('/lista', async (req, res) => {
 router.get('/obtenerdatosId/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const datos = await Datos.findById(id);
+    const datos = await Usuario.findById(id);
     if (!datos) {
       return res.status(404).json({ error: 'Datos no encontrado' })
     }
@@ -47,7 +47,7 @@ router.put('/actualizar/:id', async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
-    const datos = await Datos.findByIdAndUpdate(id, req.body);
+    const datos = await Usuario.findByIdAndUpdate(id, req.body);
  
     if (!datos) {
       return res.status(404).json({ error: 'Dato no encontrado' })
@@ -65,7 +65,7 @@ router.delete('/eliminar/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const datos = await Datos.findByIdAndDelete(id);
+    const datos = await Usuario.findByIdAndDelete(id);
     if (!datos) {
       return res.status(404).json({ error: 'Dato no encontrado' });
     }
@@ -76,21 +76,6 @@ router.delete('/eliminar/:id', async (req, res) => {
   }
 
 });
-
-router.post('/comentario', async (req, res) => {
-
-  const comentario = new Comentario(req.body);
-
-  try {
-    const nuevoComentario = await comentario.save();
-    res.status(201).json(nuevoComentario);
-    console.log('Comentario: ' + nuevoComentario);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-
-});
-
 
 module.exports = router
 
