@@ -6,12 +6,17 @@ require('./modelo/conexion');
 const ruta = require('./controlador/controlador');
 
 
-const url = 'https://banco-wuei.onrender.com';
+const allowedOrigins = ['https://banco-wuei.onrender.com', 'https://bancoaerolinea.onrender.com'];
 
-
-  app.use(cors({
-    origin: url
-  }));
+app.use(cors({
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
   
   app.use(express.json());
   app.use('/api/', ruta);
